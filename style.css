@@ -109,6 +109,16 @@ p {
     margin-bottom: 2rem;
 }
 
+.guest-name {
+    font-weight: 700;
+}
+.invite-desc .guest-name {
+    color: var(--color-gold);
+}
+.invite-preview-text .guest-name {
+    color: var(--color-gold-dark);
+}
+
 /* ==========================================
    PARTICLES & FIREWORKS
    ========================================== */

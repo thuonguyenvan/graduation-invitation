@@ -10,8 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainInvitation = document.getElementById('main-invitation');
     const bgMusic = document.getElementById('bg-music');
     const musicToggle = document.getElementById('music-toggle');
-    // (Removed RSVP & Photo Modal DOM elements)
     let isFirstPlay = true;
+
+    // Parse guest name from URL (e.g. ?to=Anh+Tuan or ?guest=Anh+Tuan)
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('to') || urlParams.get('guest');
+    if (guestName) {
+        const cleanName = guestName.trim();
+        if (cleanName) {
+            document.querySelectorAll('.guest-name').forEach(el => {
+                el.textContent = cleanName;
+            });
+        }
+    }
 
     // 1. ENVELOPE OPENING ACTION
     if (openEnvelopeBtn) {
