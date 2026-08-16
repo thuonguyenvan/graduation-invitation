@@ -78,14 +78,24 @@ document.addEventListener('DOMContentLoaded', () => {
         mainInvitation.classList.add('slide-mode');
         
         let currentSlideIndex = 0;
-        const timings = [1000, 6000, 2000, 2000]; // 1s, 6s, 2s, 2s
+        const timings = [2000, 6000, 2500, 2000]; // 2s, 6s, 2.5s, 2s
         
         function showSlide(index) {
             slides.forEach(slide => {
-                if (slide) slide.classList.remove('slide-active');
+                if (slide) {
+                    if (slide.classList.contains('slide-active')) {
+                        slide.classList.remove('slide-active');
+                        slide.classList.add('slide-exit');
+                        // Xóa class exit sau khi hiệu ứng hoàn tất (800ms)
+                        setTimeout(() => slide.classList.remove('slide-exit'), 800);
+                    } else {
+                        slide.classList.remove('slide-exit');
+                    }
+                }
             });
             
             if (slides[index]) {
+                slides[index].classList.remove('slide-exit');
                 slides[index].classList.add('slide-active');
             }
         }

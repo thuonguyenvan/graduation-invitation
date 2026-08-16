@@ -1197,8 +1197,11 @@ p {
     box-shadow: none;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    transform: scale(0.95);
+    /* Hiệu ứng mượt mà iOS-like: Trượt từ dưới lên (translateY(50px)) */
+    transform: translateY(50px) scale(0.97);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.8s;
     display: flex !important;
     flex-direction: column;
     justify-content: center;
@@ -1230,20 +1233,31 @@ p {
     width: 100vw;
     top: 0;
     left: 0;
-    transform: none;
 }
 
 .main-invitation.slide-mode .hero-content {
     max-width: 800px;
     width: 90%;
+    /* Bọc để dịch chuyển trơn tru bên trong hero */
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Trang active: hiện rõ ở trung tâm */
 .main-invitation.slide-mode .hero-section.slide-active,
 .main-invitation.slide-mode .section.slide-active {
     opacity: 1;
     visibility: visible;
-    transform: scale(1);
+    transform: translateY(0) scale(1);
     z-index: 10;
+}
+
+/* Trang cũ vừa ẩn đi: trượt tiếp lên trên và mờ đi */
+.main-invitation.slide-mode .hero-section.slide-exit,
+.main-invitation.slide-mode .section.slide-exit {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50px) scale(0.97);
+    z-index: 6;
 }
 
 /* Hide scroll indicators and footer during auto-slide recording */
