@@ -68,12 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startAutoScroll() {
-        const scrollSpeed = 1.2; // Pixels per frame (tốc độ cuộn mượt mà)
+        // Vô hiệu hóa tạm thời smooth scroll để JS cuộn từng khung hình chính xác
+        document.documentElement.style.scrollBehavior = 'auto';
+        
+        const scrollSpeed = 1.2; // Pixels per frame (tốc độ cuộn)
         function scrollStep() {
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             if (window.scrollY < maxScroll) {
                 window.scrollBy(0, scrollSpeed);
                 requestAnimationFrame(scrollStep);
+            } else {
+                // Khôi phục lại khi cuộn xong
+                document.documentElement.style.scrollBehavior = 'smooth';
             }
         }
         requestAnimationFrame(scrollStep);
