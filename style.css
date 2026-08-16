@@ -728,6 +728,17 @@ p {
     box-shadow: var(--card-shadow);
 }
 
+.map-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.map-img:hover {
+    transform: scale(1.025);
+}
+
 .btn-map-wrap {
     margin-top: 25px;
 }
