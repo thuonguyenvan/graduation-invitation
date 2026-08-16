@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const isAutoScroll = urlParams.get('autoscroll') === 'true';
+
     // 1. ENVELOPE OPENING ACTION
     if (openEnvelopeBtn) {
         openEnvelopeBtn.addEventListener('click', () => {
@@ -55,9 +57,33 @@ document.addEventListener('DOMContentLoaded', () => {
                             );
                         }, i * 300);
                     }
+
+                    // Trigger smooth auto-scroll for recording
+                    if (isAutoScroll) {
+                        setTimeout(startAutoScroll, 2000);
+                    }
                 }, 800); // fadeOut transition duration
             }, 1600);
         });
+    }
+
+    function startAutoScroll() {
+        const scrollSpeed = 1.2; // Pixels per frame (tốc độ cuộn mượt mà)
+        function scrollStep() {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            if (window.scrollY < maxScroll) {
+                window.scrollBy(0, scrollSpeed);
+                requestAnimationFrame(scrollStep);
+            }
+        }
+        requestAnimationFrame(scrollStep);
+    }
+
+    // Auto-open envelope on load if autoscroll is enabled
+    if (isAutoScroll && openEnvelopeBtn) {
+        setTimeout(() => {
+            openEnvelopeBtn.click();
+        }, 1500);
     }
 
     // 2. BACKGROUND MUSIC CONTROLS
