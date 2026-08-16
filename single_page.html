@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lễ Tốt Nghiệp Cử Nhân - Nguyễn Văn Thương</title>
+    <meta name="description" content="Thân mời bạn đến tham dự lễ tốt nghiệp cử nhân ngành CNTT (chuyên ngành KHDL & TTNT) của Nguyễn Văn Thương tại Trường Đại học Bách Khoa - Đại học Đà Nẵng.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+    <!-- Custom CSS for Single Screen Layout -->
+    <link rel="stylesheet" href="style_single.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="ve_nha.mp3" type="audio/mp3">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="music-toggle" class="music-btn hidden" aria-label="Toggle Music">
+        <svg class="music-icon playing" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <svg class="music-icon paused hidden" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm0 2h4v2h-4V5zM10 19c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+        </svg>
+    </button>
+
+    <!-- Canvas for fireworks/particles -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- 1. ENVELOPE STAGE (Same as original) -->
+    <div id="envelope-container" class="envelope-container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="flap top-flap"></div>
+                <div class="flap left-flap"></div>
+                <div class="flap right-flap"></div>
+                <div class="paper">
+                    <div class="paper-preview">
+                        <span class="graduation-cap-icon">🎓</span>
+                        <h3>GRADUATION</h3>
+                        <p class="invite-preview-text">Thân mời <span class="guest-name">bạn</span> đến dự lễ tốt nghiệp của Văn Thương</p>
+                    </div>
+                </div>
+                <div class="wax-seal" id="open-envelope-btn">
+                    <span class="seal-inner">🎓</span>
+                    <span class="seal-pulse"></span>
+                </div>
+            </div>
+            <div class="envelope-hint">Bấm vào dấu niêm phong để mở thiệp</div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN SINGLE-PAGE INVITATION CONTENT (No page scrolling) -->
+    <div id="main-invitation" class="main-invitation hidden">
+        <div class="hero-bg-overlay"></div>
+        
+        <div class="single-layout-container">
+            
+            <!-- MOBILE HEADER (Fixed top on mobile, hidden on desktop) -->
+            <header class="mobile-only-header">
+                <span class="mobile-cap-icon">🎓</span>
+                <h2>LỄ TỐT NGHIỆP CỬ NHÂN</h2>
+                <h1 class="mobile-graduate-name">Nguyễn Văn Thương</h1>
+            </header>
+
+            <!-- LEFT COLUMN (DESKTOP) / MAIN SLIDER CONTAINER (MOBILE) -->
+            <main class="invitation-slider-wrapper">
+                
+                <!-- CARD 1: INVITATION MESSAGE -->
+                <section id="card-message" class="info-card active">
+                    <div class="desktop-header-wrap">
+                        <div class="animated-cap-wrapper">
+                            <span class="main-cap">🎓</span>
+                        </div>
+                        <p class="subtitle-top">LỄ TỐT NGHIỆP CỬ NHÂN</p>
+                        <h1 class="graduate-name">Nguyễn Văn Thương</h1>
+                        <div class="degree-badge">
+                            <span class="degree-title">Công Nghệ Thông Tin</span>
+                            <span class="major-title">Chuyên ngành: Khoa học dữ liệu & Trí tuệ nhân tạo (DS & AI)</span>
+                        </div>
+                        <p class="university">Trường Đại học Bách Khoa - Đại học Đà Nẵng</p>
+                    </div>
+
+                    <div class="card-content-inner invitation-msg">
+                        <h2 class="card-title">Thư Mời</h2>
+                        <div class="divider-gold"></div>
+                        <p class="welcome-text">
+                            "Vậy là sau bốn năm với biết bao thử thách, trải nghiệm, tri thức cùng những kỷ niệm vui buồn, Thương đã chính thức hoàn thành hành trình đại học của mình."
+                        </p>
+                        <p class="invite-desc">
+                            Trong khoảnh khắc đánh dấu sự khép lại của một chặng đường và mở ra một hành trình mới này, Thương trân trọng kính mời <span class="guest-name">bạn</span> đến tham dự Lễ Tốt nghiệp, cùng Thương chung vui và lưu giữ những khoảnh khắc thật đáng nhớ.
+                        </p>
+                        <p class="invite-desc" style="margin-top: 12px;">
+                            Sự hiện diện của <span class="guest-name">bạn</span> sẽ khiến ngày đặc biệt ấy thêm ý nghĩa và giúp hành trình của Thương tại nơi đây khép lại một cách thật trọn vẹn nhất.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- CARD 2: TIME & LOCATION + COUNTDOWN -->
+                <section id="card-time" class="info-card">
+                    <h2 class="card-title text-center">Thời Gian & Địa Điểm</h2>
+                    <div class="divider-gold"></div>
+                    
+                    <div class="card-content-inner">
+                        <div class="time-grid">
+                            <div class="time-card">
+                                <div class="icon-wrap">
+                                    <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-2-1.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                                </div>
+                                <h3>Thời Gian</h3>
+                                <p class="time-main">Từ 10:00 sáng</p>
+                                <p class="date-main">Thứ Bảy, ngày 29/08/2026</p>
+                            </div>
+                            <div class="time-card">
+                                <div class="icon-wrap">
+                                    <svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                </div>
+                                <h3>Địa Điểm</h3>
+                                <p class="loc-main">Trường Đại học Bách Khoa</p>
+                                <p class="loc-sub">Khu F</p>
+                                <p class="loc-address">54 Nguyễn Lương Bằng, TP. Đà Nẵng</p>
+                            </div>
+                        </div>
+
+                        <!-- Countdown Timer -->
+                        <div class="countdown-container">
+                            <h3 class="countdown-title text-center">Đếm Ngược</h3>
+                            <div id="countdown" class="countdown-grid">
+                                <div class="countdown-item">
+                                    <span id="days" class="countdown-num">00</span>
+                                    <span class="countdown-label">Ngày</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="hours" class="countdown-num">00</span>
+                                    <span class="countdown-label">Giờ</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="minutes" class="countdown-num">00</span>
+                                    <span class="countdown-label">Phút</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span id="seconds" class="countdown-num">00</span>
+                                    <span class="countdown-label">Giây</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CARD 3: MAP / DIAGRAM IMAGE -->
+                <section id="card-map" class="info-card">
+                    <h2 class="card-title text-center">Sơ Đồ Chỉ Đường</h2>
+                    <div class="divider-gold"></div>
+                    
+                    <div class="card-content-inner map-card-content">
+                        <div class="map-iframe-container">
+                            <img src="image.png" alt="Sơ đồ chỉ đường Lễ tốt nghiệp" class="map-img">
+                        </div>
+                        <div class="text-center btn-map-wrap">
+                            <a href="https://maps.app.goo.gl/wJ1q1j3zSihy6NnFA" target="_blank" class="btn btn-gold btn-ripple">
+                                <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align: middle; margin-right: 6px;"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                Mở Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- MOBILE NAVIGATION BAR (Fixed bottom on mobile, hidden on desktop) -->
+            <nav class="mobile-nav-bar">
+                <button class="nav-item active" data-target="card-message">
+                    <span class="nav-icon">💌</span>
+                    <span class="nav-label">Thư Mời</span>
+                </button>
+                <button class="nav-item" data-target="card-time">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-label">Chi Tiết</span>
+                </button>
+                <button class="nav-item" data-target="card-map">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-label">Sơ Đồ</span>
+                </button>
+            </nav>
+
+            <!-- DESKTOP FOOTER / MOBILE FOOTER -->
+            <footer class="single-footer">
+                <div class="footer-contact">
+                    <span>Liên hệ Thương: <strong>076.673.9336</strong></span>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="app_single.js"></script>
+</body>
+</html>
