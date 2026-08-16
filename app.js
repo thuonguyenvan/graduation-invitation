@@ -58,34 +58,48 @@ document.addEventListener('DOMContentLoaded', () => {
                         }, i * 300);
                     }
 
-                    // Trigger smooth auto-scroll for recording
+                    // Trigger smooth auto-slide for recording
                     if (isAutoScroll) {
-                        setTimeout(startAutoScroll, 2000);
+                        setTimeout(startAutoSlide, 2000);
                     }
                 }, 800); // fadeOut transition duration
             }, 1600);
         });
     }
 
-    function startAutoScroll() {
-        // Vô hiệu hóa tạm thời smooth scroll để JS cuộn từng khung hình chính xác
-        document.documentElement.style.scrollBehavior = 'auto';
+    function startAutoSlide() {
+        const slides = [
+            document.querySelector('.hero-section'),
+            document.querySelector('.invitation-msg'),
+            document.querySelector('.time-section'),
+            document.querySelector('.map-section')
+        ];
         
-        // Nhận tốc độ từ URL (mặc định tăng lên 2.5 thay vì 1.2)
-        const speedParam = urlParams.get('speed');
-        const scrollSpeed = speedParam ? parseFloat(speedParam) : 2.5;
+        mainInvitation.classList.add('slide-mode');
         
-        function scrollStep() {
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            if (window.scrollY < maxScroll) {
-                window.scrollBy(0, scrollSpeed);
-                requestAnimationFrame(scrollStep);
-            } else {
-                // Khôi phục lại khi cuộn xong
-                document.documentElement.style.scrollBehavior = 'smooth';
+        let currentSlideIndex = 0;
+        const timings = [1000, 6000, 2000, 2000]; // 1s, 6s, 2s, 2s
+        
+        function showSlide(index) {
+            slides.forEach(slide => {
+                if (slide) slide.classList.remove('slide-active');
+            });
+            
+            if (slides[index]) {
+                slides[index].classList.add('slide-active');
             }
         }
-        requestAnimationFrame(scrollStep);
+        
+        function nextSlide() {
+            showSlide(currentSlideIndex);
+            
+            const delay = timings[currentSlideIndex];
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            
+            setTimeout(nextSlide, delay);
+        }
+        
+        nextSlide();
     }
 
     // Auto-open envelope on load if autoscroll is enabled

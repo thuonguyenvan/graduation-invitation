@@ -1171,3 +1171,93 @@ p {
         padding: 25px 15px;
     }
 }
+
+/* ==========================================
+   AUTO-SLIDE MODE FOR RECORDING (AUTOSCROLL=TRUE)
+   ========================================== */
+.main-invitation.slide-mode {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.main-invitation.slide-mode .hero-section,
+.main-invitation.slide-mode .section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: scale(0.95);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 5;
+}
+
+.main-invitation.slide-mode .section.card {
+    background: rgba(23, 42, 69, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    height: 80vh;
+    margin: auto;
+    position: absolute;
+    top: 10vh;
+    left: 5%;
+    right: 5%;
+}
+
+.main-invitation.slide-mode .hero-section {
+    background: transparent;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+.main-invitation.slide-mode .hero-content {
+    max-width: 800px;
+    width: 90%;
+}
+
+.main-invitation.slide-mode .hero-section.slide-active,
+.main-invitation.slide-mode .section.slide-active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+}
+
+/* Hide scroll indicators and footer during auto-slide recording */
+.main-invitation.slide-mode .scroll-indicator,
+.main-invitation.slide-mode .footer {
+    display: none !important;
+}
+
+/* Adjust map card inside slide mode to look good */
+.main-invitation.slide-mode .map-iframe-container {
+    height: 50vh;
+    max-height: 380px;
+}
+.main-invitation.slide-mode .map-img {
+    object-fit: contain;
+    background: rgba(10, 25, 47, 0.4);
+}
