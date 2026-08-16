@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Vô hiệu hóa tạm thời smooth scroll để JS cuộn từng khung hình chính xác
         document.documentElement.style.scrollBehavior = 'auto';
         
-        const scrollSpeed = 1.2; // Pixels per frame (tốc độ cuộn)
+        // Nhận tốc độ từ URL (mặc định tăng lên 2.5 thay vì 1.2)
+        const speedParam = urlParams.get('speed');
+        const scrollSpeed = speedParam ? parseFloat(speedParam) : 2.5;
+        
         function scrollStep() {
             const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             if (window.scrollY < maxScroll) {
