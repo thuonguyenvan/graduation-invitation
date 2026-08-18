@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(startAutoSlide, 2000);
                     }
                 }, 800); // fadeOut transition duration
-            }, 3500);
+            }, 2700);
         });
     }
 
