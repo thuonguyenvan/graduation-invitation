@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản In Thiệp Mời Tốt Nghiệp - Nguyễn Văn Thương</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-navy: #091322;
+            --color-bg-navy-light: #152B48;
+            --color-bg-cream: #FCFAF2;
+            --color-gold-dark: #8E6F2D;
+            --color-gold-light: #E5C158;
+            --color-gold-med: #C5A046;
+            --color-charcoal: #2B3A4A;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --font-body: 'Lora', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e2e8f0;
+            font-family: var(--font-sans);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* Control Panel (Hidden on Print) */
+        .control-panel {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(142, 111, 45, 0.15);
+        }
+
+        .control-panel h2 {
+            font-size: 1.2rem;
+            color: var(--color-bg-navy);
+            margin-bottom: 10px;
+            font-family: var(--font-serif);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .control-panel p {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .input-group-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-bg-navy);
+        }
+
+        .input-group input {
+            padding: 10px 12px;
+            border: 1px solid #c8bda3;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background-color: #fcfcf9;
+        }
+
+        .btn-wrap {
+            margin-top: 15px;
+        }
+
+        .btn {
+            background: var(--color-bg-navy);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(9, 19, 34, 0.15);
+        }
+
+        .btn:hover {
+            background: var(--color-gold-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, var(--color-gold-med) 0%, var(--color-gold-dark) 100%);
+            box-shadow: 0 4px 12px rgba(142, 111, 45, 0.25);
+        }
+
+        .btn-print:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Card Container */
+        .printable-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Card Page Styling (14cm x 14cm) */
+        .card-page {
+            width: 530px;
+            height: 530px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 35px;
+        }
+
+        /* ART-DECO CORNERS OVERLAY */
+        .corner-ornament {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--color-gold-light);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .corner-tl {
+            top: 25px;
+            left: 25px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: 25px;
+            right: 25px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: 25px;
+            left: 25px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: 25px;
+            right: 25px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .card-page::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+            border: 1px solid rgba(229, 193, 88, 0.35);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* FRONT SIDE - COSMIC NAVY GRADIENT */
+        .card-front {
+            background: radial-gradient(circle at center, var(--color-bg-navy-light) 0%, var(--color-bg-navy) 100%);
+            color: #ffffff;
+        }
+
+        .front-content {
+            text-align: center;
+            z-index: 5;
+            width: 100%;
+        }
+
+        .cap-icon {
+            font-size: 3.2rem;
+            display: block;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 2px 8px rgba(229, 193, 88, 0.4));
+        }
+
+        .front-subtitle {
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            color: var(--color-gold-light);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .front-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+            line-height: 1.3;
+            background: linear-gradient(135deg, #ffffff 0%, #dcdde1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .front-name {
+            font-family: var(--font-serif);
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--color-gold-light);
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .front-degree-badge {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(229, 193, 88, 0.35);
+            padding: 8px 18px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .front-degree {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .front-major {
+            font-size: 0.75rem;
+            color: var(--color-gold-light);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .front-uni {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #cbd5e1;
+        }
+
+        /* BACK SIDE - ROYAL CREAM ALABASTER */
+        .card-back {
+            background-color: var(--color-bg-cream);
+            color: var(--color-charcoal);
+        }
+
+        .card-back .corner-ornament {
+            border-color: var(--color-gold-dark);
+        }
+
+        .card-back::before {
+            border-color: rgba(142, 111, 45, 0.3);
+        }
+
+        .back-content {
+            z-index: 5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 5px;
+        }
+
+        .back-header {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .back-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-gold-dark);
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        .invite-line {
+            font-size: 0.82rem;
+            margin-top: 8px;
+            font-weight: 500;
+            color: var(--color-charcoal);
+        }
+
+        /* Guest name styling (mockup handwritten script) */
+        .invite-line .guest-name-print {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-gold-dark);
+            border-bottom: 1px solid rgba(142, 111, 45, 0.4);
+            padding: 0 10px;
+            display: inline-block;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .invite-line .guest-dots {
+            color: #8c826b;
+            letter-spacing: 1px;
+        }
+
+        .back-body {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            line-height: 1.55;
+            color: #3e4c59;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .back-body p {
+            margin-bottom: 6px;
+            text-indent: 15px;
+        }
+
+        .back-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(142, 111, 45, 0.2);
+            padding-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .details-text {
+            width: 60%;
+        }
+
+        .details-box {
+            border: 1px solid rgba(142, 111, 45, 0.25);
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+        }
+
+        .details-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .details-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--color-gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .details-desc {
+            font-size: 0.72rem;
+            color: var(--color-charcoal);
+            line-height: 1.3;
+        }
+
+        .qr-wrap {
+            width: 32%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .qr-box {
+            width: 90px;
+            height: 90px;
+            padding: 5px;
+            background: #ffffff;
+            border: 1px solid rgba(142, 111, 45, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .qr-image-el {
+            width: 78px;
+            height: 78px;
+            display: block;
+        }
+
+        .qr-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            margin-top: 4px;
+            color: #718096;
+            line-height: 1.25;
+            letter-spacing: 0.2px;
+        }
+
+        .back-footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #718096;
+            border-top: 1px dashed rgba(142, 111, 45, 0.2);
+            padding-top: 6px;
+        }
+
+        /* ==========================================
+           PRINT OVERRIDES (@media print)
+           ========================================== */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .control-panel {
+                display: none !important;
+            }
+
+            .printable-container {
+                gap: 0;
+            }
+
+            .card-page {
+                box-shadow: none !important;
+                page-break-after: always;
+                width: 140mm;
+                height: 140mm;
+                margin: 0 auto;
+                border: none !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Control Panel (Hidden on Print) -->
+    <div class="control-panel">
+        <h2>🖨️ TRÌNH TẠO BẢN IN THIỆP CỨNG ĐỘNG (14x14cm)</h2>
+        <p>Hỗ trợ cá nhân hóa tên khách mời trực tiếp vào bản in và mã QR trực tuyến của khách.</p>
+
+        <div class="input-group-row">
+            <div class="input-group">
+                <label for="invitation-url">1. Đường dẫn thiệp online:</label>
+                <input type="text" id="invitation-url" value="https://thuonguyenvan.github.io/graduation-invitation/"
+                    style="width: 300px;" oninput="updateGuestDetails()">
+            </div>
+            <div class="input-group">
+                <label for="guest-name-input">2. Tên khách mời (Ví dụ: Anh Tuấn, Gia Đình...):</label>
+                <input type="text" id="guest-name-input" placeholder="Để trống nếu muốn viết tay"
+                    oninput="updateGuestDetails()" style="width: 250px;">
+            </div>
+        </div>
+
+        <div class="btn-wrap">
+            <button class="btn btn-print" onclick="window.print()">Bấm để In Thiệp (Lưu PDF)</button>
+        </div>
+        <div
+            style="margin-top: 15px; font-size: 0.78rem; color: var(--color-gold-dark); background: #fcfcf9; padding: 8px 12px; border-radius: 6px; border: 1px dashed #c8bda3; display: inline-block;">
+            Đường dẫn mã QR thực tế: <strong id="current-qr-url"
+                style="color: var(--color-bg-navy); word-break: break-all;">https://thuonguyenvan.github.io/graduation-invitation/</strong>
+        </div>
+        <p style="font-size: 0.75rem; margin-top: 10px; color: #718096;">
+            * Cấu hình In: Chọn <strong>Lề: Không có (None)</strong> và tích chọn <strong>Đồ họa nền (Background
+                graphics)</strong> để hiển thị nhũ vàng và xanh Navy chuẩn.
+        </p>
+    </div>
+
+    <!-- Printable Cards -->
+    <div class="printable-container">
+
+        <!-- 1. FRONT CARD (MẶT BÌA TRƯỚC) -->
+        <div class="card-page card-front">
+            <!-- Art Deco Corners -->
+            <div class="corner-ornament corner-tl"></div>
+            <div class="corner-ornament corner-tr"></div>
+            <div class="corner-ornament corner-bl"></div>
+            <div class="corner-ornament corner-br"></div>
+
+            <div class="front-content">
+                <span class="cap-icon">🎓</span>
+                <p class="front-subtitle">THƯ MỜI DỰ LỄ TỐT NGHIỆP</p>
+                <h1 class="front-title">CỬ NHÂN CÔNG NGHỆ THÔNG TIN</h1>
+
+                <h2 class="front-name">Nguyễn Văn Thương</h2>
+
+                <div class="front-degree-badge">
+                    <span class="front-degree">Chuyên ngành: Khoa học dữ liệu & Trí tuệ nhân tạo</span>
+
+                </div>
+
+                <p class="front-uni">Trường Đại học Bách Khoa - Đại học Đà Nẵng</p>
+            </div>
+        </div>
+
+        <!-- 2. BACK CARD (MẶT RUỘT SAU) -->
+        <div class="card-page card-back">
+            <!-- Art Deco Corners -->
+            <div class="corner-ornament corner-tl"></div>
+            <div class="corner-ornament corner-tr"></div>
+            <div class="corner-ornament corner-bl"></div>
+            <div class="corner-ornament corner-br"></div>
+
+            <div class="back-content">
+
+                <div class="back-header">
+                    <h2 class="back-title">THƯ MỜI</h2>
+                    <div class="invite-line">
+                        Thân mời:
+                        <span id="print-guest-area">
+                            <span class="guest-dots">.......................................................</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="back-body">
+                    <p>
+                        Vậy là sau bốn năm với biết bao thử thách, trải nghiệm, tri thức cùng những kỷ niệm vui buồn,
+                        Thương đã chính thức hoàn thành chặng đường đại học của mình tại trường Đại học Bách khoa - Đại
+                        học Đà Nẵng.
+                    </p>
+                    <p>
+                        Trong khoảnh khắc đánh dấu sự khép lại của quãng đời sinh viên và mở ra một hành trình mới này,
+                        Thương trân trọng mời <span class="guest-name-inline">bạn</span> đến tham dự Lễ Tốt nghiệp, cùng
+                        Thương chung vui và lưu giữ những
+                        khoảnh khắc thật đáng nhớ.
+                    </p>
+                    <p>
+                        Sự hiện diện của <span class="guest-name-inline">bạn</span> sẽ khiến ngày đặc biệt ấy thêm ý
+                        nghĩa và giúp quãng thời gian của Thương tại nơi đây khép lại một cách thật trọn vẹn nhất.
+                    </p>
+                    <p>
+                        Chân thành cảm ơn <span class="guest-name-inline">bạn</span>!
+                    </p>
+                </div>
+
+                <div class="back-details">
+                    <div class="details-text">
+                        <div class="details-box">
+                            <div class="details-title">📅 THỜI GIAN</div>
+                            <div class="details-desc">
+                                Từ 10:00 sáng, Thứ Bảy ngày 29/08/2026
+                            </div>
+                        </div>
+                        <div class="details-box">
+                            <div class="details-title">📍 ĐỊA ĐIỂM</div>
+                            <div class="details-desc">
+                                Khu F, Trường Đại học Bách Khoa - Đại học Đà Nẵng<br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qr-wrap">
+                        <div class="qr-box">
+                            <img id="print-qr-image" src="" alt="Mã QR" class="qr-image-el">
+                        </div>
+                        <div class="qr-label">Quét QR xem<br>thiệp online</div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateGuestDetails() {
+            const guestName = document.getElementById('guest-name-input').value.trim();
+            const guestArea = document.getElementById('print-guest-area');
+            const urlInput = document.getElementById('invitation-url').value.trim();
+
+            // 1. Update guest name text display on card
+            if (guestName) {
+                guestArea.innerHTML = `<span class="guest-name-print">${guestName}</span>`;
+            } else {
+                guestArea.innerHTML = `<span class="guest-dots">.......................................................</span>`;
+            }
+
+            // Update all inline guest name instances in text body
+            const inlineSpans = document.querySelectorAll('.guest-name-inline');
+            inlineSpans.forEach(span => {
+                if (guestName) {
+                    span.textContent = guestName;
+                    span.style.fontWeight = "600";
+                    span.style.color = "var(--color-gold-dark)";
+                } else {
+                    span.textContent = "bạn";
+                    span.style.fontWeight = "normal";
+                    span.style.color = "inherit";
+                }
+            });
+
+            // 2. Generate customized URL
+            let finalUrl = urlInput;
+            if (guestName) {
+                const separator = urlInput.includes('?') ? '&' : '?';
+                finalUrl = urlInput + separator + "to=" + encodeURIComponent(guestName);
+            }
+
+            // Update URL text in control panel
+            const debugUrlSpan = document.getElementById('current-qr-url');
+            if (debugUrlSpan) {
+                debugUrlSpan.textContent = finalUrl;
+            }
+
+            // Update QR Code Image src dynamically using QR Server API
+            const qrImage = document.getElementById('print-qr-image');
+            if (qrImage) {
+                qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(finalUrl);
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentUrl = window.location.href;
+            if (currentUrl.includes('github.io')) {
+                const cleanUrl = currentUrl.replace('printable_card.html', '');
+                document.getElementById('invitation-url').value = cleanUrl;
+            }
+            updateGuestDetails();
+        });
+    </script>
+</body>
+
+</html>
