@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. COUNTDOWN TIMER
-    // Target date: Saturday, August 29, 2026 at 10:00:00 AM (Vietnam timezone GMT+7)
-    const targetDate = new Date('2026-08-29T10:00:00+07:00').getTime();
+    // Target date: Saturday, August 29, 2026 at 09:30:00 AM (Vietnam timezone GMT+7)
+    const targetDate = new Date('2026-08-29T09:30:00+07:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();

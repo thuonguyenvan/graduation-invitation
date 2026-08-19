@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. COUNTDOWN TIMER
-    const targetDate = new Date('2026-08-29T10:00:00+07:00').getTime();
+    const targetDate = new Date('2026-08-29T09:30:00+07:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
