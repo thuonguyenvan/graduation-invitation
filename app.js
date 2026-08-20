@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. BACKGROUND MUSIC CONTROLS
     function playMusic() {
         if (isFirstPlay) {
-            bgMusic.currentTime = 134; // Start at 2:14
+            bgMusic.currentTime = 25; // Start at 0:25
             isFirstPlay = false;
         }
         bgMusic.play().then(() => {
